@@ -15,6 +15,7 @@ import GeocoderControl from "./GeocoderControl"
 import useScreenSize from "../hooks/useScreenSize"
 import { getDistance } from "geolib"
 import { metersToPixelsAtMaxZoom } from "../utils/metersToPixelsAtMaxZoom"
+import { CustomerType } from "@/typings"
 
 interface SearchMarker {
   longitude: number
@@ -29,18 +30,6 @@ interface FeatureType {
     coordinates: [number, number]
   }
 }
-type CustomerType = {
-  selectedColor: { value: string }
-  brands?: { name: string }[]
-  customAddress: {
-    _type: string
-    addressName: string
-    longitude: string
-    latitude: string
-    postalCode: string
-  }
-  name: string
-} | null
 
 type Props = {
   customers: CustomerType[]

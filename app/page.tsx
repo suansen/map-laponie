@@ -1,7 +1,8 @@
-import { groq } from "next-sanity"
+import { QueryParams, groq } from "next-sanity"
 import { sanityClient } from "./utils/sanity/client"
 // import MapSection from "./components/Map"
 import Mapbox from "./components/Mapbox"
+import { CustomerType } from "@/typings"
 
 // import Image from "next/image"
 const queries = {
@@ -14,9 +15,13 @@ const queries = {
 }
 
 export default async function Home() {
-  const customers = await sanityClient.fetch(queries.pages, {
-    next: { revalidate: 60 }
-  })
+  const customers = await sanityClient.fetch<CustomerType[]>(
+    queries.pages,
+    {},
+    {
+      next: { revalidate: 30 }
+    }
+  )
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between relative">
