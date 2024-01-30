@@ -1,25 +1,30 @@
 import { groq } from "next-sanity"
 import { sanityClient } from "./utils/sanity/client"
 // import MapSection from "./components/Map"
+import Mapbox from "./components/Mapbox"
 
 // import Image from "next/image"
 const queries = {
   pages: groq`*[_type == "customer"]{
-  _type,
-  name,
-  customAddress
+  selectedColor->{value},
+  brands[]->{name},
+  customAddress,
+  name
 }`
 }
 
 export default async function Home() {
   const customers = await sanityClient.fetch(queries.pages, {
-    cache: "no-store"
+    next: { revalidate: 60 }
   })
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h2 className="underline">Test</h2>
-      {/* <MapSection /> */}
-      <div>{JSON.stringify(customers)}</div>
+    <main className="flex min-h-screen flex-col items-center justify-between relative">
+      {/* <h2 className="underline">Test</h2> */}
+      <Mapbox customers={customers} />
+      {/* <div className="absolute bottom-4 p-8 bg-black/50">
+        {JSON.stringify(customers)}
+      </div> */}
     </main>
   )
 }

@@ -31,3 +31,15 @@ body {
     text-wrap: balance;
   }
 }
+/*
+.input.mapboxgl-ctrl-geocoder--input {
+  color: black;
+  height: 32px;
+  border-radius: 8px;
+  width: 160px;
+}
+
+div.mapboxgl-ctrl-geocoder--pin-right {
+  color: white;
+  background-color: red;
+} */
