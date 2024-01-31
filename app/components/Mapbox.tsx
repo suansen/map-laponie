@@ -45,7 +45,7 @@ const Mapbox = ({ customers }: Props) => {
   const [viewState, setViewState] = useState({
     longitude: 103.86191236577002,
     latitude: 1.309917528787238,
-    zoom: 16
+    zoom: 12
   })
   const [popupInfo, setPopupInfo] = useState<CustomerType>(null)
   // const [featuresArray, setFeaturesArray] = useState<FeatureType[]>([
