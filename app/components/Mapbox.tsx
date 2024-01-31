@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Fragment, useEffect, useState } from "react"
+import React, { Fragment, useState } from "react"
 import Map, {
   GeolocateControl,
   Layer,
@@ -22,14 +22,14 @@ interface SearchMarker {
   latitude: number
 }
 
-interface FeatureType {
-  type: "Feature"
-  properties: {}
-  geometry: {
-    type: "Point"
-    coordinates: [number, number]
-  }
-}
+// interface FeatureType {
+//   type: "Feature"
+//   properties: {}
+//   geometry: {
+//     type: "Point"
+//     coordinates: [number, number]
+//   }
+// }
 
 type Props = {
   customers: CustomerType[]
@@ -48,47 +48,47 @@ const Mapbox = ({ customers }: Props) => {
     zoom: 16
   })
   const [popupInfo, setPopupInfo] = useState<CustomerType>(null)
-  const [featuresArray, setFeaturesArray] = useState<FeatureType[]>([
-    {
-      type: "Feature",
-      properties: {},
-      geometry: {
-        type: "Point",
-        coordinates: [103.86191236577002, 1.309917528787238]
-      }
-    }
-  ])
+  // const [featuresArray, setFeaturesArray] = useState<FeatureType[]>([
+  //   {
+  //     type: "Feature",
+  //     properties: {},
+  //     geometry: {
+  //       type: "Point",
+  //       coordinates: [103.86191236577002, 1.309917528787238]
+  //     }
+  //   }
+  // ])
 
-  useEffect(() => {
-    setFeaturesArray([
-      {
-        type: "Feature",
-        properties: {},
-        geometry: {
-          type: "Point",
-          coordinates: [103.86191236577002, 1.309917528787238]
-        }
-      }
-    ])
-    customers.forEach((customer) => {
-      if (customer?.customAddress) {
-        setFeaturesArray((prev) => [
-          ...prev,
-          {
-            type: "Feature",
-            properties: {},
-            geometry: {
-              type: "Point",
-              coordinates: [
-                +customer?.customAddress?.longitude,
-                +customer?.customAddress?.latitude
-              ]
-            }
-          }
-        ])
-      }
-    })
-  }, [customers])
+  // useEffect(() => {
+  //   setFeaturesArray([
+  //     {
+  //       type: "Feature",
+  //       properties: {},
+  //       geometry: {
+  //         type: "Point",
+  //         coordinates: [103.86191236577002, 1.309917528787238]
+  //       }
+  //     }
+  //   ])
+  //   customers.forEach((customer) => {
+  //     if (customer?.customAddress) {
+  //       setFeaturesArray((prev) => [
+  //         ...prev,
+  //         {
+  //           type: "Feature",
+  //           properties: {},
+  //           geometry: {
+  //             type: "Point",
+  //             coordinates: [
+  //               +customer?.customAddress?.longitude,
+  //               +customer?.customAddress?.latitude
+  //             ]
+  //           }
+  //         }
+  //       ])
+  //     }
+  //   })
+  // }, [customers])
 
   // const pins = useMemo(
   //   () =>
@@ -153,6 +153,28 @@ const Mapbox = ({ customers }: Props) => {
         <Source
           type="geojson"
           data={{
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "Point",
+              coordinates: [
+                searchMarkerInfo.longitude!,
+                searchMarkerInfo.latitude!
+              ]
+            }
+          }}
+        >
+          <Layer
+            {...metersToPixelsAtMaxZoom({
+              meters: 1000,
+              latitude: searchMarkerInfo.latitude!
+              // color: customer?.selectedColor.value
+            })}
+          />
+        </Source>
+        {/* <Source
+          type="geojson"
+          data={{
             type: "FeatureCollection",
             features: featuresArray
           }}
@@ -175,7 +197,7 @@ const Mapbox = ({ customers }: Props) => {
               />
             </Fragment>
           ))}
-        </Source>
+        </Source> */}
         <Marker
           longitude={103.86191236577002}
           latitude={1.309917528787238}
@@ -238,14 +260,14 @@ const Mapbox = ({ customers }: Props) => {
                 <div className=" col-span-3">
                   {popupInfo.customAddress.postalCode}
                 </div>
-                <div className=" col-span-2">Longitude:</div>
-                <div className=" col-span-3">
-                  {popupInfo.customAddress.longitude}
-                </div>
-                <div className=" col-span-2">Latitude:</div>
-                <div className=" col-span-3">
-                  {popupInfo.customAddress.latitude}
-                </div>
+                {/* <div className=" col-span-2">Longitude:</div> */}
+                {/* <div className=" col-span-3"> */}
+                {/* {popupInfo.customAddress.longitude} */}
+                {/* </div> */}
+                {/* <div className=" col-span-2">Latitude:</div> */}
+                {/* <div className=" col-span-3"> */}
+                {/* {popupInfo.customAddress.latitude} */}
+                {/* </div> */}
                 <div className=" col-span-2">Distance: </div>
                 <div className=" col-span-3">
                   {getDistance(

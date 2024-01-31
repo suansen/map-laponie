@@ -1,4 +1,4 @@
-import { QueryParams, groq } from "next-sanity"
+import { groq } from "next-sanity"
 import { sanityClient } from "./utils/sanity/client"
 // import MapSection from "./components/Map"
 import Mapbox from "./components/Mapbox"
