@@ -292,7 +292,7 @@ const Mapbox = ({ customers }: Props) => {
           </Popup>
         )}
       </Map>
-      <div className="bg-black/50 p-2 absolute bottom-16 lg:top-0 left-1/2 -translate-x-1/2 z-10 rounded-lg flex flex-col lg:flex-row gap-2 h-fit">
+      <div className="bg-black/50 text-white p-2 absolute bottom-16 lg:top-0 left-1/2 -translate-x-1/2 z-10 rounded-lg flex flex-col lg:flex-row gap-2 h-fit">
         <div>
           <strong>Longitude: </strong>
           {searchMarkerInfo?.longitude}
