@@ -228,8 +228,10 @@ const Mapbox = ({ customers }: Props) => {
         {customers.map((customer, index) => (
           <Fragment key={`marker-${index}`}>
             <Marker
-              longitude={+customer?.customAddress.longitude!}
-              latitude={+customer?.customAddress.latitude!}
+              longitude={
+                +customer?.customAddress.longitude! || 103.86191236577002
+              }
+              latitude={+customer?.customAddress.latitude! || 1.309917528787238}
               anchor="center"
               color={customer?.selectedColor.value}
               onClick={(e) => {
@@ -244,8 +246,12 @@ const Mapbox = ({ customers }: Props) => {
         {popupInfo && (
           <Popup
             anchor="top"
-            longitude={Number(popupInfo?.customAddress?.longitude)}
-            latitude={Number(popupInfo?.customAddress?.latitude)}
+            longitude={
+              Number(popupInfo?.customAddress?.longitude) || 103.86191236577002
+            }
+            latitude={
+              Number(popupInfo?.customAddress?.latitude) || 1.309917528787238
+            }
             onClose={() => setPopupInfo(null)}
             className=" md:min-w-72 overflow-hidden"
           >
@@ -276,8 +282,10 @@ const Mapbox = ({ customers }: Props) => {
                       latitude: searchMarkerInfo?.latitude
                     },
                     {
-                      longitude: popupInfo.customAddress.longitude,
-                      latitude: popupInfo.customAddress.latitude
+                      longitude:
+                        popupInfo.customAddress.longitude || 103.86191236577002,
+                      latitude:
+                        popupInfo.customAddress.latitude || 1.309917528787238
                     }
                   ) / 1000}{" "}
                   km
